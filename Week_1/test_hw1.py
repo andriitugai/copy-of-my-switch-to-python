@@ -5,7 +5,7 @@ input_dict2 = {
     'key1': 74,
     'key2': "admamention",
     'key3': "s",
-    'key4': "underscore",
+    'key4': "undersCore",
     'key5': ['Billable', 'opportunity', 'negotiation', 'durable']
 }
 
@@ -40,7 +40,8 @@ class TestHomeWork1(unittest.TestCase):
             ['Wine', 'Love', 'Corporation', 'Billboard', 'Cloud', 'Weapon']), 'WLCBCW')
 
     def test_hw_1(self):
-        self.assertEqual(hw1.hw_1(input_dict2), ('Jsames_sBond', 'James_Bond'))
+        self.assertEqual(hw1.hw_1(input_dict2),
+                         ('Jsames_sBond', 'James_Bond'))
 
 
 if __name__ == '__main__':
