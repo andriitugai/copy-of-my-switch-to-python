@@ -13,7 +13,7 @@ def filter_by_age(members_list, age_limit):
     '''
     Return list of members whose age gretaer or equal to age_limit
     '''
-    return [*filter(lambda item: item["age"] >= age_limit, members_list)]
+    return [member for member in members_list if member["age"] >= age_limit]
 
 
 def sort_and_modify(members_list, field_to_reverse):
