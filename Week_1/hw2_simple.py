@@ -35,7 +35,7 @@ if __name__ == '__main__':
     divider = '+ {0:-^20} + {0:-^8} + {0:-^20} +'.format('')
     header = '| {0:^20} | {1:^8} | {2:^20} |' \
         .format("Name", "Age", "Name(reversed)")
-    row_template = f'| {name:<20} | {age:^8} | {rev:>20} |'
+    row_template = '| {0:<20} | {1:^8} | {2:>20} |'
 
     new_list = sorted(arr, key=lambda item: item["age"], reverse=True)
 
@@ -45,5 +45,5 @@ if __name__ == '__main__':
 
     for member in new_list:
         print(row_template.format(
-            **member, member["name"][::-1]))
+            member["name"], member["age"], member["name"][::-1]))
     print(divider)
