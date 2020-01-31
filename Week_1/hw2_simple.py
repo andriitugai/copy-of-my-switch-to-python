@@ -7,43 +7,46 @@ arr = [
 ]
 
 
-if __name__ == '__main__':
+def main():
 
+    # we need to create NEW (filtered on "age" >= 20) list
+    arr_filtered = [user for user in arr if user["age"] >= 20]
+
+    # print it
     divider = '+ {0:-^20} + {0:-^8} +'.format('')
-    header = '| {0:^20} | {1:^8} |'.format("Name", "Age", "Name(reversed)")
-    row_template = '| {0:<20} | {1:^8} |'
+    header = '| {0:^20} | {1:^8} |'.format("Name", "Age")
+    row_template = '| {name:<20} | {age:^8} |'
 
-    print('arr, init values:')
-    print(divider)
-    print(header)
-    print(divider)
-    for member in arr:
-        print(row_template.format(
-            member["name"], member["age"]))
-    print(divider)
-    # --------------
     print('arr, filtered, min age = 20:')
     print(divider)
     print(header)
     print(divider)
-    for member in arr:
-        if member["age"] >= 20:
-            print(row_template.format(member["name"], member["age"]))
+    for user in arr:
+        if user["age"] >= 20:
+            print(row_template.format(**user))
     print(divider)
+    print()
     # --------------
-    print('arr, sorted and modified:')
+    # We don't need to create new list,
+    # just print sorted arr with additional field
+
     divider = '+ {0:-^20} + {0:-^8} + {0:-^20} +'.format('')
     header = '| {0:^20} | {1:^8} | {2:^20} |' \
         .format("Name", "Age", "Name(reversed)")
-    row_template = '| {0:<20} | {1:^8} | {2:>20} |'
 
-    new_list = sorted(arr, key=lambda item: item["age"], reverse=True)
-
+    print('arr, sorted and modified:')
     print(divider)
     print(header)
     print(divider)
 
-    for member in new_list:
-        print(row_template.format(
-            member["name"], member["age"], member["name"][::-1]))
+    for user in sorted(arr, key=lambda user: user["age"], reverse=True):
+        print(
+            '| {name:<20} | {age:>8} | {:>20} |'
+            .format(user["name"][::-1], **user)
+        )
+
     print(divider)
+
+
+if __name__ == '__main__':
+    main()
