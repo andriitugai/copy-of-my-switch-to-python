@@ -1,6 +1,5 @@
+import random
 import sys
-
-# Manual input:
 
 
 def receipts_input(input_set_name: str) -> set:
@@ -9,6 +8,21 @@ def receipts_input(input_set_name: str) -> set:
     input_set_name is needed to communicate with user.
     input_set_name should be a noun describing content of the set in plural form.
     '''
+    def user_input_(input_set_name: str) -> set:
+        ''' returns set from user input.'''
+
+        input_set_ = set()
+        while True:
+            print(f"There are {len(input_set_)} {input_set_name} in the set")
+            input_item = input(
+                f"Enter another {input_set_name[:-1]} (empty input for exit): ")
+            if not input_item:
+                break
+
+            input_set_.add(input_item)
+
+        return input_set_
+
     # Cycle to avoid empty input
     while True:
         input_set = user_input_(input_set_name)
@@ -17,8 +31,7 @@ def receipts_input(input_set_name: str) -> set:
             print(f"""
             Your list of {input_set_name} is empty.
             No receipts can be generated.""")
-            do_it_again = input("Are you sure to quit? (YES/no)")
-            if not do_it_again:
+            if not input("Are you sure to quit? (YES/no)"):
                 sys.exit(0)
         else:
             break
@@ -26,36 +39,57 @@ def receipts_input(input_set_name: str) -> set:
     return input_set
 
 
-def user_input_(input_set_name: str) -> set:
-    ''' Fills an empty with the values from user input and returns it.'''
+def create_receipt(ingredients, ways, units):
+    # number ingredients in the receipt:
+    random.seed(300)
+    num_i = random.randrange(1, len(ingredients)+1)
 
-    input_set_ = set()
-    while True:
-        print(f"There are {len(input_set_)} {input_set_name} in the set")
-        input_item = input(
-            f"Enter another {input_set_name[:-1]} (empty input for exit): ")
-        if not input_item:
-            break
+    random.shuffle(ingredients)
+    receipt_ingredients = ingredients[:num_i]
 
-        input_set_.add(input_item)
+    # create random receipt as a list of dicts:
+    receipt = []
+    random.seed(321)
+    for ingredient in receipt_ingredients:
+        item = {
+            "ingredient": ingredient,
+            "unit": random.choice(units),
+            "qty": random.randint(1, 100)
+        }
+        receipt.append(item)
+    way_to_prepare = random.choice(ways)
 
-    return input_set_
+    return receipt, way_to_prepare
 
 
-if __name__ == '__main__':
+def print_receipt(receipt, way_to_prepare):
+    divider = '='*52
+    print("RECEIPT")
+    print(divider)
+    for item in receipt:
+        print('{ingredient:<30} {unit:^12} {qty:>8}'.format(**item))
 
+    print(divider)
+    print(f'Way to prepare: {way_to_prepare}')
+
+
+def main():
     print('INGREDIENTS:')
     print('='*20)
-    ingredients = receipts_input("ingredients")
+    ingredients = list(receipts_input("ingredients"))
     print()
     print('MEASUREMENT UNITS:')
     print('='*20)
-    units = receipts_input("units")
+    units = list(receipts_input("units"))
     print()
     print('PREPARATION WAYS:')
     print('='*20)
-    ways = receipts_input("preparation_ways")
+    ways = list(receipts_input("preparation_ways"))
 
-    # print(ingredients)
-    # print(units)
-    # print(ways)
+    print()
+    print()
+    print_receipt(*create_receipt(ingredients, ways, units))
+
+
+if __name__ == '__main__':
+    main()
