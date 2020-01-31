@@ -15,15 +15,15 @@ def main():
     # print it
     divider = '+ {0:-^20} + {0:-^8} +'.format('')
     header = '| {0:^20} | {1:^8} |'.format("Name", "Age")
-    row_template = '| {name:<20} | {age:^8} |'
 
     print('arr, filtered, min age = 20:')
     print(divider)
     print(header)
     print(divider)
-    for user in arr:
-        if user["age"] >= 20:
-            print(row_template.format(**user))
+
+    for user in arr_filtered:
+        print('| {name:<20} | {age:^8} |'.format(**user))
+
     print(divider)
     print()
     # --------------
