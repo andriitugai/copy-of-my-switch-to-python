@@ -3,7 +3,7 @@ import sys
 
 
 def receipts_input(input_set_name: str) -> set:
-    ''' Just a shell to improve communication with user
+    ''' Just a shell to improve communication with user,
     and let him a chance to avoid empty input.
     input_set_name is needed to communicate with user.
     input_set_name should be a noun describing content of the set in plural form.
