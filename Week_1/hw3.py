@@ -2,6 +2,9 @@ import random
 import sys
 
 
+PARAMS_LIST = ["ingredients", "measurement units", "preparation ways"]
+
+
 def receipts_input(input_set_name: str) -> set:
     """ Just a shell to improve communication with user
     and let him a chance to avoid empty input.
@@ -24,6 +27,9 @@ def receipts_input(input_set_name: str) -> set:
             input_set_.add(input_item)
 
         return input_set_
+
+    print()
+    print(input_set_name.upper(), "="*20, sep='\n')
 
     # Cycle to avoid empty input
     while True:
@@ -79,14 +85,8 @@ def print_receipt(receipt, way_to_prepare):
 
 
 def main():
-    print("INGREDIENTS:", "="*20, sep='\n')
-    ingredients = list(receipts_input("ingredients"))
-    print()
-    print("MEASUREMENT UNITS:", "="*20, sep='\n')
-    units = list(receipts_input("units"))
-    print()
-    print("PREPARATION WAYS:", "="*20, sep='\n')
-    ways = list(receipts_input("preparation_ways"))
+    
+    ingredients, units, ways = [list(receipts_input(param)) for param in PARAMS_LIST]
 
     print()
     print()
