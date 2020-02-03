@@ -37,7 +37,7 @@ def receipts_input(input_set_name: str) -> set:
             )
             doit_again = input("Are you sure to quit? (YES/no)")
             if not doit_again or doit_again.lower()[0] == "y":
-                sys.exit(0)
+                sys.exit(1)
         else:
             break
 
@@ -79,16 +79,13 @@ def print_receipt(receipt, way_to_prepare):
 
 
 def main():
-    print("INGREDIENTS:")
-    print("=" * 20)
+    print("INGREDIENTS:", "="*20, sep='\n')
     ingredients = list(receipts_input("ingredients"))
     print()
-    print("MEASUREMENT UNITS:")
-    print("=" * 20)
+    print("MEASUREMENT UNITS:", "="*20, sep='\n')
     units = list(receipts_input("units"))
     print()
-    print("PREPARATION WAYS:")
-    print("=" * 20)
+    print("PREPARATION WAYS:", "="*20, sep='\n')
     ways = list(receipts_input("preparation_ways"))
 
     print()

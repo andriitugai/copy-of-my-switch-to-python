@@ -41,7 +41,7 @@ def main():
 
     for user in sorted(arr, key=lambda user: user["age"], reverse=True):
         print(
-            '| {name:<20} | {age:>8} | {:>20} |'
+            '| {name:<20} | {age:>8} | {rev_name:>20} |'
             .format(user["name"][::-1], **user)
         )
 

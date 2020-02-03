@@ -17,9 +17,7 @@ symbols = {
     'underscore':   '_'
 }
 
-
-def main():
-    rules = [
+rules = [
         lambda x: chr(x),
         lambda word: word[4-1:6],
         lambda val: val,
@@ -28,8 +26,9 @@ def main():
                                for idx, word in enumerate(w_lst)])
     ]
 
-    print(''.join([rule(input_dict[key])
-                   for rule, key in zip(rules, input_dict)]))
+
+def main():
+    print(*[rule(input_dict[key]) for rule, key in zip(rules, input_dict)], sep='')
 
 
 if __name__ == '__main__':
