@@ -75,8 +75,9 @@ def generate_list(size, level=0, limit=3):
     if level < limit:
         # 4% of elements becomes random lists with the length of 4%
         # hardcode, I know
-        for idx in random.sample(range(size), size//25):
-            randlist[idx] = generate_list(size//25, level+1, limit)
+    subset_size = size // 25    
+    for idx in random.sample(range(size), subset_size):
+        randlist[idx] = generate_list(subset_size, level+1, limit)
 
     return randlist
 
