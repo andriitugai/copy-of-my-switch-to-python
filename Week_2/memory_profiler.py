@@ -70,9 +70,7 @@ def generate_list(size, level=0, limit=3):
     param: limit - maximum deep
     '''
 
-    randlist = []
-    for _ in range(size):
-        randlist.append(random.randint(*RAND_INTERVAL))
+    randlist=random.choises(range(*RAND_INTERVAL), k=size)
 
     if level < limit:
         # 4% of elements becomes random lists with the length of 4%
