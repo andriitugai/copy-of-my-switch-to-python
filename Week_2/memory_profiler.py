@@ -18,13 +18,12 @@ LIST_SIZE = 10_000
 
 
 def get_size_refcount(obj, seen=None):
-    '''Return total size and reference count for object of any of Python's basic types:
+    """Return total size and reference count for object of any of Python's basic types:
     int, float, boolean, str, list, tuple, set, dictionary (may be more).
     Objects of <collections> can contain other collections.
-    '''
+    """
     # Auxilary class for processing results of recursive calls
     class Result(object):
-
         def __init__(self, size, refcount):
             self.size = size
             self.refcount = refcount
@@ -34,7 +33,7 @@ def get_size_refcount(obj, seen=None):
             yield self.refcount
 
         def __add__(self, r2):
-            return Result(self.size+r2.size, self.refcount+r2.refcount)
+            return Result(self.size + r2.size, self.refcount + r2.refcount)
 
         @staticmethod
         def sum(iterable_of_result):
@@ -57,43 +56,28 @@ def get_size_refcount(obj, seen=None):
             for k, v in obj.items()
         )
     elif isinstance(obj, Iterable) and not isinstance(obj, (str, bytes)):
-        result = result + \
-            Result.sum(get_size_refcount(item, seen) for item in obj)
+        result = result + Result.sum(get_size_refcount(item, seen) for item in obj)
 
     return tuple(result)
 
 
 def generate_list(size, level=0, limit=3):
-    '''
+    """
     Generate random list of random lists of numbers
     size of list of level n+1 25 times less
     param: limit - maximum deep
-    '''
+    """
 
-    randlist=random.choises(range(*RAND_INTERVAL), k=size)
+    randlist = random.choices(range(*RAND_INTERVAL), k=size)
 
     if level < limit:
         # 4% of elements becomes random lists with the length of 4%
         # hardcode, I know
-    subset_size = size // 25    
-    for idx in random.sample(range(size), subset_size):
-        randlist[idx] = generate_list(subset_size, level+1, limit)
+        subset_size = size // 25
+        for idx in random.sample(range(size), subset_size):
+            randlist[idx] = generate_list(subset_size, level + 1, limit)
 
     return randlist
-
-
-# class header(object):
-#     def __init__(self, hdr):
-#         self.hdr = hdr
-#         print()
-#         print(hdr)
-
-#     def __enter__(self):
-#         return self
-
-#     def __exit__(self, *args):
-#         result = yield
-#         print("Memory consumed: {}, Number of references: {}\n".format(*result))
 
 
 @contextmanager
@@ -101,11 +85,10 @@ def header(hdr):
     print()
     print(hdr)
     yield
-    print('.'*60)
+    print("." * 60)
 
 
-def print_profiler_result(result):
-    print(f"Memory consumed: {result[0]}, Number of references: {result[1]}")
+ROW_TEMPLATE = "Memory consumed: {0}, Number of references: {1}"
 
 
 def main():
@@ -113,18 +96,16 @@ def main():
     print("Task # 2:")
     a = generate_list(LIST_SIZE)
 
-    with header(f"For random list of {LIST_SIZE} numbers:") as h:
-        # next(h)
-        print_profiler_result(get_size_refcount(a))
-        # h.send(get_size_refcount(a))
+    with header(f"For random list of {LIST_SIZE} numbers:"):
+        result = ROW_TEMPLATE.format(get_size_refcount(a))
+        print(result)
 
     del a[::2]
 
-    with header("After deleting every 2nd element:") as h:
-        print_profiler_result(get_size_refcount(a))
-        # next(h)
-        # h.send(get_size_refcount(a))
+    with header(f"For random list of {LIST_SIZE} numbers:"):
+        result = ROW_TEMPLATE.format(get_size_refcount(a))
+        print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
