@@ -97,13 +97,13 @@ def main():
     a = generate_list(LIST_SIZE)
 
     with header(f"For random list of {LIST_SIZE} numbers:"):
-        result = ROW_TEMPLATE.format(get_size_refcount(a))
+        result = ROW_TEMPLATE.format(*get_size_refcount(a))
         print(result)
 
     del a[::2]
 
     with header(f"For random list of {LIST_SIZE} numbers:"):
-        result = ROW_TEMPLATE.format(get_size_refcount(a))
+        result = ROW_TEMPLATE.format(*get_size_refcount(a))
         print(result)
 
 
