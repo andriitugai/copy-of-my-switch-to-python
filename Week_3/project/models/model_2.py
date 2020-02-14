@@ -1,18 +1,18 @@
-import sys
-
-
 class SecondModel(object):
+    import models.model_1 as m1
 
-    def get_model_name(self):
-        return self.__class__.__name__
+    @classmethod
+    def get_model_name(cls):
+        return cls.__name__
 
-    def get_first_model_name(self):
-        print(model_1.FirstModel.__class__.__name__)
+    @classmethod
+    def get_module_name(cls):
+        return cls.__module__
 
+    @classmethod
+    def get_first_model_name(cls):
+        return cls.m1.FirstModel.__name__
 
-from model_1 import FirstModel 
 
 if __name__ == '__main__':
-    y = SecondModel()
-    print(y.get_first_model_name())
-    print(sys.modules)
+    print(SecondModel.get_module_name())

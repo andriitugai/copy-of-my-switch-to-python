@@ -1,9 +1,19 @@
-import ../models/model_1
+class FirstController(object):
 
-def FirstController(object):
+    import models.model_1 as md1
 
-    def get_class_name(self):
-        return self.__class__.__name__
+    @classmethod
+    def get_class_name(cls):
+        return cls.__name__
 
-    def get_model_name(self):
-        
+    @classmethod
+    def get_model_name(cls):
+        return cls.md1.FirstModel.__name__
+
+    @classmethod
+    def get_module_name(cls):
+        return cls.md1.__name__
+
+
+if __name__ == '__main__':
+    print(FirstController.get_module_name())

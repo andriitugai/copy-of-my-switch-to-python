@@ -1,13 +1,14 @@
-from model_2 import SecondModel
-
-
 class FirstModel(object):
-    import model_2
+    import models.model_2 as m2
 
-    def get_model_name(self):
-        return self.__class__.__name__
+    @classmethod
+    def get_model_name(cls):
+        return cls.__name__
 
-    def get_second_model_name(self):
-        pass
+    @classmethod
+    def get_module_name(cls):
+        return cls.__module__
 
-
+    @classmethod
+    def get_second_model_name(cls):
+        return cls.m2.SecondModel.__name__

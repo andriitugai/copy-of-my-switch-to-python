@@ -64,7 +64,7 @@ def dice():
 
 def main():
 
-    game = SnakeLadders()
+    game = SnakeLadders(5)
     while game.status:
         dices = dice(), dice()
         print(dices)
