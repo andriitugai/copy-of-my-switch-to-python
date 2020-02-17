@@ -1,13 +1,12 @@
 import argparse
 import os
 import zipfile
-# import pyminizip
 
 
 class dir_zipper:
     def __init__(self, path_to_zip_file, password):
         self.path_to_zip_file = path_to_zip_file
-        self.password = bytes(password, 'utf8')
+        self.password = password
 
     def __enter__(self):
         self.zip_file = zipfile.ZipFile(self.path_to_zip_file, 'w', zipfile.ZIP_DEFLATED)
@@ -23,26 +22,23 @@ class dir_zipper:
             for file in files:
                 abs_path = os.sep.join([abs_root, file])
                 rel_path = abs_path[len(root) + 1:]
-                yield rel_path
+                yield abs_path, rel_path
 
     def archive(self, source_dir):
-        for path in self.__class__._relative_tree(source_dir):
-            self.zip_file.write(path)
+        for abs_path, rel_path in self.__class__._relative_tree(source_dir):
+            self.zip_file.write(abs_path, arcname=rel_path)
 
 
-
-
-
-def main():
+def args_parse():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-i', '--input',
-                        default=r'D:\Projects\Python\Epam\Week_1_0',
+                        default=r'E:\Projects\Python\Switch_to_Python\switch-to-python-mp\Week_1',
                         help="Input path with destination to the directory",
                         type=str,
                         metavar='/usr/home'
                         )
     parser.add_argument('-o', '--output',
-                        default=r'D:\Projects\Python\Epam\Week_1_0\archive.zip',
+                        default=r'E:\Projects\Python\Switch_to_Python\switch-to-python-mp\week_1.zip',
                         help="Output .zip file with destination to the directory",
                         type=str,
                         metavar='/usr/home/archive.zip')
@@ -52,7 +48,12 @@ def main():
                         metavar='password')
     args = parser.parse_args()
 
-    print(args.input, args.output, args.password)
+    return args
+
+
+def main():
+
+    args = args_parse()
 
     with dir_zipper(args.output, args.password) as zipper:
         zipper.archive(args.input)
