@@ -1,1 +1,6 @@
 **/*.pyc
+**/venv/*
+Week_2/message_generator.py
+Week_2/memory.py
+Week_2/message_generator.py
+Week_2/coroutine.py

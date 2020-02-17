@@ -88,7 +88,7 @@ def header(hdr):
     print("." * 60)
 
 
-ROW_TEMPLATE = "Memory consumed: {0}, Number of references: {1}"
+ROW_TEMPLATE = "Memory consumed: {}, Number of references: {}"
 
 
 def main():
