@@ -32,10 +32,11 @@ def retry(exception, tries=3):
                         print("The function {0} has raised exception".format(func.__name__))
                         print(ex)
                         tries -= 1
-                        print("Tries left: {}".format(tries))                        
+                        print("Tries left: {0}".format(tries))                        
                         continue
                     else:
-                        exc_type, exc_value, exc_traceback = sys.exc_info()
+                        # exc_type, exc_value, exc_traceback = sys.exc_info()
+                        exc_traceback = sys.exc_info()[2]
                         traceback.print_tb(exc_traceback, limit=None, file=sys.stdout)
                         print(ex)
                         break
