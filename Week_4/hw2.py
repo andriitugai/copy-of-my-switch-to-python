@@ -1,4 +1,5 @@
 import itertools
+
 class NumberedLinesFileIterator(object):
 
     def __init__(self, file):

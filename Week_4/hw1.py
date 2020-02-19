@@ -1,49 +1,54 @@
+import sys, traceback
+
 from datetime import datetime
 from functools import wraps
-from time import time, sleep
 
 
 class CustomException(Exception):
-    def __init__(self, message, errors):
-        super().__init__(message)
-        print(f"Timestamp: {datetime.now().isoformat()}")
+    
+    def __init__(self, message):
+        self._message = message   
+        
+    def __repr__(self):
+        return "{0}\n\tMessage: {1}\n\tTimestamp: {2}"\
+            .format(self.__class__.__name__, self._message,datetime.now().isoformat())
+
+    def __str__(self):
+        return self.__repr__()
 
 
-def retry(t_func, exceptions=ValueError, tries=3):
-    @wraps(t_func)
-    def wrapped_func(*args, **kwargs):
-        nonlocal tries
-        try:
-            print(f"wrapped by wrapper")
-            print(f"{tries} left")
-            t_func(*args, **kwargs)
-        except exceptions:
-            if tries > 0:
-                print(datetime.now().isoformat())
-                # raise CustomException('This is description of the custom exception')
-                tries -= 1
-            else:
-                print("No more tries left")
-                raise exceptions
+def retry(exception, tries=3):
+    def dec(func):
 
-    return wrapped_func
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            nonlocal tries
+
+            while True:
+                try:
+                    return func(*args, **kwargs)
+                except exception as ex:
+                    if tries > 0:
+                        print("The function {0} has raised exception".format(func.__name__))
+                        print(ex)
+                        tries -= 1
+                        print("Tries left: {}".format(tries))                        
+                        continue
+                    else:
+                        exc_type, exc_value, exc_traceback = sys.exc_info()
+                        traceback.print_tb(exc_traceback, limit=None, file=sys.stdout)
+                        print(ex)
+                        break
+        return wrapper
+    return dec
 
 
-@retry
+@retry(CustomException, tries=2)    
 def make_trouble():
-    print("Hello World!")
-    raise ValueError
+    raise CustomException("This is description of the custom exception")
 
 
-def main():
-    make_trouble()
-    sleep(1)
-    make_trouble()
-    sleep(1)
-    make_trouble()
-    sleep(1)
-    make_trouble()
-    sleep(1)
+def main():    
     make_trouble()
 
 
