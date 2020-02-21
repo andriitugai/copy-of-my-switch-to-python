@@ -11,8 +11,8 @@ def main():
     open("test:21.txt")
     open("test:22.txt")
 
-    with open("Week_5\hw3_pseudo_file.py") as a:
-        print(a.readline(), a.readline(), a.readline(), a.readline(), sep = '\r')
+    # with open("Week_5\hw3_pseudo_file.py") as a:
+    #     print(a.readline(), a.readline(), a.readline(), a.readline(), sep = '\r')
 
     a = open("test:21.txt")
     print("\n------->>> Check pseudo-file representation:")
