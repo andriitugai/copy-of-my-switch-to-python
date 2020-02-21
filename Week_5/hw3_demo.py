@@ -1,7 +1,7 @@
 import io
 
-from .text_generator import TextGenerator
-from .hw3_decorator import open_decorator
+from text_generator import TextGenerator
+from hw3_decorator import open_decorator
 
 
 def main():

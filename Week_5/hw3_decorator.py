@@ -1,6 +1,6 @@
 from functools import wraps
 
-from .hw3_pseudo_file import PseudoFile
+from hw3_pseudo_file import PseudoFile
 
 def open_decorator(func):
     '''
