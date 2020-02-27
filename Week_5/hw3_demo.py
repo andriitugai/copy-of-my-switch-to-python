@@ -20,10 +20,10 @@ def main():
     a.close()
 
     # ----------------------------------------------------------
-    print("\n------->>> Check writing mode:")
+    print("\n------->>> Check writing mode (80):")
     a = open("test:21.txt", "w")
 
-    para = TextGenerator.get_formatted_para_as_str()
+    para = TextGenerator.get_formatted_para_as_str(80)
 
     print("\n------->>> Random text #1:")
     print(para)
@@ -41,9 +41,9 @@ def main():
     print("\n------->>> Check 'adding' mode:")
     a = open("test:21.txt", "a")
 
-    para = TextGenerator.get_formatted_para_as_str()
+    para = TextGenerator.get_formatted_para_as_str(40)
 
-    print("\n------->>> Random text #2:")
+    print("\n------->>> Random text #2 (40):")
     print(para)
     a.write(para)
     a.close()
@@ -59,9 +59,9 @@ def main():
     print("\n------->>> Add another file:")
     b = open("test:22.txt", "a")
 
-    para = TextGenerator.get_formatted_para_as_str()
+    para = TextGenerator.get_formatted_para_as_str(60)
 
-    print("\n------->>> Random text #3:")
+    print("\n------->>> Random text #3 (60):")
     print(para)
     b.write(para)
     b.close()

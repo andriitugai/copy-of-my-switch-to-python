@@ -58,13 +58,13 @@ class TextGenerator(object):
                 return result
 
     @classmethod
-    def get_formatted_para_as_list(cls):
+    def get_formatted_para_as_list(cls, width=TEXT_WIDTH):
         para = cls._generate_para()
-        return cls._format_para(para, TEXT_WIDTH)
+        return cls._format_para(para, width)
 
     @classmethod
-    def get_formatted_para_as_str(cls):
-        return os.linesep.join(cls.get_formatted_para_as_list())
+    def get_formatted_para_as_str(cls, width=TEXT_WIDTH):
+        return os.linesep.join(cls.get_formatted_para_as_list(width))
 
 
 if __name__ == '__main__':
