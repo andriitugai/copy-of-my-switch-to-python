@@ -28,24 +28,48 @@ class dir_zipper:
         for abs_path, rel_path in self.__class__._relative_tree(source_dir):
             self.zip_file.write(abs_path, arcname=rel_path)
 
+    def extract(self, dest_dir):
+        self.zip_file.extractall(path=dest_dir)
+
 
 def args_parse():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-i', '--input',
+    subparsers = parser.add_subparsers(dest='action')
+
+    backup = subparsers.add_parser('backup', help='Archive directory to the .zip file')    
+    backup.add_argument('-i', '--input',
                         default=r'E:\Projects\Python\Switch_to_Python\switch-to-python-mp\Week_1',
                         help="Input path with destination to the directory",
                         type=str,
                         metavar='/usr/home'
                         )
-    parser.add_argument('-o', '--output',
+    backup.add_argument('-o', '--output',
                         default=r'E:\Projects\Python\Switch_to_Python\switch-to-python-mp\week_1.zip',
                         help="Output .zip file with destination to the directory",
                         type=str,
                         metavar='/usr/home/archive.zip')
-    parser.add_argument('-p', '--password',
+    backup.add_argument('-p', '--password',
                         default=None,
                         help="Password for the .zip file",
                         metavar='password')
+
+    restore = subparsers.add_parser('restore', help='Restore directory from the .zip file')
+    restore.add_argument('-i', '--input',
+                        default=r'E:\Projects\Python\Switch_to_Python\switch-to-python-mp\week_1.zip',
+                        help="Path to the .zip file",
+                        type=str,
+                        metavar='/usr/home/archive.zip'
+                        )
+    restore.add_argument('-o', '--output',
+                        default=r'E:\Projects\Python\Switch_to_Python\switch-to-python-mp\Week_1',
+                        help="Path to the destination directory",
+                        type=str,
+                        metavar='/usr/home')
+    restore.add_argument('-p', '--password',
+                        default=None,
+                        help="Password for the .zip file",
+                        metavar='password')
+
     args = parser.parse_args()
 
     return args
@@ -55,8 +79,14 @@ def main():
 
     args = args_parse()
 
-    with dir_zipper(args.output, args.password) as zipper:
-        zipper.archive(args.input)
+    # print(args.input, args.output, args.password, args.action)
+
+    if args.action == 'backup':
+        with dir_zipper(args.output, args.password) as zipper:
+            zipper.archive(args.input)
+    elif args.action == 'restore':
+        with dir_zipper(args.input, args.password) as zipper:
+            zipper.archive(args.output)
 
 
 if __name__ == '__main__':
