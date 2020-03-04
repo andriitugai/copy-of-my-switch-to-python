@@ -1,0 +1,49 @@
+The package contains:
+
+    setup.py
+    ticket_generator.py
+    hw1.py
+    hw1_readme.1st (this file)
+
+
+To install Happy Ticket Checker v.1.0 you should run the following commands:
+
+    1. Setup virtual environment:
+    $ python -m venv venv
+
+    2. Activate the virtual environment:
+    Windows:
+    $ ./venv/Scripts/activate 
+    Linux, OsX:
+    ...
+
+    3. Setup the package:
+    $ pip install --editable .
+
+
+To generate file with random ticket numbers you should use gentickets command:
+
+    Usage: gentickets [OPTIONS] [OUT]
+
+    Generates NUMBER random 6-digits ticket numbers and write they to OUT file
+
+    Options:
+    -n, --number INTEGER  How many ticket numbers to generate.
+    --help                Show this message and exit.
+
+
+To check tickets for happiness use happytickets command:
+    Usage: happytickets [OPTIONS] FILE_PATH
+
+    Counts [COUNT] or prints [PRINT] the happy tickets from the file
+    [FILE_PATH]  according to the rule name [RULE] provided
+
+    Options:
+    -r, --rule [NewYork|Boston|BlackJack|Palindrome]
+                                    The name of the rule to check the happiness
+    -a, --action [count|print]      The action to perform with happy tickets:
+                                    just count or print to the console
+                                    [default: count]
+    --help                          Show this message and exit.
+
+

@@ -1,10 +1,6 @@
 import string
 import random
-import os
-
-
-FILENAME = 'tickets.txt'
-NUM_TICKETS = 1_000
+import click
 
 def generate_ticket():
     return ''.join(
@@ -14,10 +10,20 @@ def generate_ticket():
             ]
         )
 
-def main():
-    with open(FILENAME, 'w') as file_result:
-        for _ in range(NUM_TICKETS):
-            file_result.write(generate_ticket()+'\n')
+@click.command()
+@click.option('--number','-n',
+    default=1_000,
+    help='How many ticket numbers to generate.')
+@click.argument('out', 
+    type=click.File('w'), 
+    default='-', 
+    required=False)
+def main(number, out):
+    '''
+    Generates NUMBER random 6-digits ticket numbers and write they to OUT file
+    '''
+    for _ in range(number):
+        click.echo(generate_ticket(), file=out)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
