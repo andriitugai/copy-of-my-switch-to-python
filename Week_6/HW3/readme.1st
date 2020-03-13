@@ -1,0 +1,10 @@
+To run the project locally:
+> python -m venv venv
+> .\venv\Scripts\activate
+> pip install django
+> cd user_list
+> python .\manage.py runserver
+
+in the browser:
+    localhost:8000
+    
