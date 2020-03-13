@@ -1,0 +1,41 @@
+Spark
+
+Ecosystem
+https://data-flair.training/blogs/apache-spark-ecosystem-components/
+https://www.edureka.co/blog/apache-spark-ecosystem/
+https://techvidvan.com/tutorials/spark-ecosystem/
+
+Features
+https://data-flair.training/blogs/apache-spark-features/
+
+DAG
+https://data-flair.training/blogs/dag-in-apache-spark/
+
+Operations
+https://data-flair.training/blogs/spark-rdd-operations-transformations-actions/
+
+Partitions
+https://medium.com/@mrpowers/managing-spark-partitions-with-coalesce-and-repartition-4050c57ad5c4
+______________________________________________________________________________________________________________
+
+
+Dask
+
+https://docs.dask.org/en/latest/
+https://habr.com/ru/company/piter/blog/454262/
+https://www.anaconda.com/wp-content/uploads/2019/03/2018-11-Dask_CheatSheet-1.pdf
+https://analyticsindiamag.com/why-you-should-use-dask-if-you-are-into-data-science-and-machine-learning/
+https://towardsdatascience.com/trying-out-dask-dataframes-in-python-for-fast-data-analysis-in-parallel-aa960c18a915
+
+
+
+Homework
+
+https://rp5.ru/Weather_archive_in_Kharkiv_(airport)
+1. Скачать максимальный датасет. Начиная с 2005 года
+2. Посчитать среднюю температуру, влажность и давление за каждый месяц и неделю каждого года
+3. Вывести аномальные показатели (год/месяц/неделя). (Отклонения от средней температуры/влажности и давления за неделю +- 5% в градусах)
+4. Если есть пустые значения в погоде - заполнить данные Null и вывести в конце, сколько за год было Null
+5. Сделать температурные графики за любой месяц (каждый отдельно), но за каждый год (например январь с 2005 по 2020 года)
+
+Сделать все шаги в Pandas, PySpark и Dask.
